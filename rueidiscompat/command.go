@@ -539,6 +539,12 @@ func newSliceCmd(res rueidis.RedisResult, isJSONObjKeys bool, keys ...string) *S
 	return cmd
 }
 
+func NewSliceCmd(res rueidis.RedisResult, isJSONObjKeys bool, keys ...string) *SliceCmd {
+	cmd := &SliceCmd{keys: keys, json: isJSONObjKeys}
+	cmd.from(res)
+	return cmd
+}
+
 // Scan scans the results from the map into a destination struct. The map keys
 // are matched in the Redis struct fields by the `redis:"field"` tag.
 // NOTE: result from JSON.ObjKeys should not call this.
